@@ -84,7 +84,7 @@ Everything else is Python standard library.
 ## 4. Modes (flags)
 
 Exactly one mode runs per invocation. The PDF directory used below is
-`../transcript-pdfs` (relative to this folder).
+`transcript-pdfs` (relative to this folder).
 
 ### At a glance — what each flag does
 
@@ -121,7 +121,7 @@ Prerequisites: `--content-stats` / `--dedup-names` need `--extract-trans` (or
 Structural metadata report on the PDFs (no transcript output).
 
 ```bash
-python analysis-pipeline.py --pdf-summary --pdf-dir ../transcript-pdfs --tag 24-file-data
+python analysis-pipeline.py --pdf-summary --pdf-dir transcript-pdfs --tag 24-file-data
 ```
 | | |
 |---|---|
@@ -133,7 +133,7 @@ Raw transcripts only — speaker names exactly as in the PDF, no ID resolution.
 This is the feeder for the analysis modes.
 
 ```bash
-python analysis-pipeline.py --extract-trans --pdf-dir ../transcript-pdfs --tag 24-file-data
+python analysis-pipeline.py --extract-trans --pdf-dir transcript-pdfs --tag 24-file-data
 ```
 | | |
 |---|---|
@@ -173,7 +173,7 @@ The full pipeline. **`--pdf-dir` is optional**:
 
 ```bash
 # full, from PDFs
-python analysis-pipeline.py --get-norm-trans --pdf-dir ../transcript-pdfs --tag 24-file-data
+python analysis-pipeline.py --get-norm-trans --pdf-dir transcript-pdfs --tag 24-file-data
 
 # analysis-only, on already-extracted transcripts
 python analysis-pipeline.py --get-norm-trans --tag 24-file-data
@@ -233,7 +233,7 @@ python analysis-pipeline.py --align-and-review2 --tag 24-file-data --file-id 001
 
 ```bash
 # One shot: PDFs → everything
-python analysis-pipeline.py --get-norm-trans --pdf-dir ../transcript-pdfs --tag 24-file-data
+python analysis-pipeline.py --get-norm-trans --pdf-dir transcript-pdfs --tag 24-file-data
 
 # Then review specific files' written→spoken normalization
 python analysis-pipeline.py --align-and-review --tag 24-file-data --file-id 001,003
@@ -242,7 +242,7 @@ python analysis-pipeline.py --align-and-review --tag 24-file-data --file-id 001,
 Or step by step:
 
 ```bash
-python analysis-pipeline.py --extract-trans  --pdf-dir ../transcript-pdfs --tag 24-file-data
+python analysis-pipeline.py --extract-trans  --pdf-dir transcript-pdfs --tag 24-file-data
 python analysis-pipeline.py --dedup-names    --tag 24-file-data    # inspect spk-id-mapping
 python analysis-pipeline.py --content-stats  --tag 24-file-data
 python analysis-pipeline.py --get-norm-trans --tag 24-file-data    # V1 / V3 + word freq
