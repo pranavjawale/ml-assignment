@@ -1,0 +1,27 @@
+# speaker-aliases.tsv
+# Speaker name alias table — loaded by utils/aliases.py as RAW_ALIASES.
+#
+# Maps raw PDF speaker strings (exactly as they appear after the colon in
+# transcripts) to their normalized canonical form. These are applied 
+# BEFORE the phonetic deduplication algorithm runs, so it handles
+# the hard cases the algorithm cannot catch on its own (OCR errors, missing
+# spaces, dropped letters, same-person-different-name).
+#
+# Columns (tab-separated):
+#   raw_name      canonical      category
+#
+# - raw_name and canonical are required.
+# - category is a human-assigned label describing why the alias exists
+#   (e.g. OCR error, spacing, typo). It is documentation only — the loader
+#   ignores it.
+# - Lines starting with '#' and blank lines are ignored.
+# - Match is exact and case-sensitive against the raw PDF string.
+#
+# raw_name	canonical	category
+CHIEF JUSTICEDRACHUD	CHIEF JUSTICE DY CHANDRACHUD	
+ATTORNEY GENERAL R.ENKATARAMANI	ATTORNEY GENERAL R. VENKATARAMANI	concat
+JUSTICE SURYAKANT	JUSTICE SURYA KANT	spacing
+ADVOCATE NIDHESH GUPTA	NIDHESH GUPTA	title
+JUSTICE P.V. SANJAY KUMAR	JUSTICE SANJAY KUMAR	title
+MR. AMIT SHAMRA	AMIT SHARMA	title
+DR. ABHISHEK SINGHVI	DR. MANU SINGHVI	Same person, different name

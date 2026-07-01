@@ -1,0 +1,33 @@
+# Python dependencies for analysis-pipeline.py
+#
+# First-time setup (from this directory):
+#     python -m venv .venv
+#     .venv\Scripts\activate            # Windows
+#     source .venv/bin/activate         # macOS / Linux
+#     pip install -r requirements.txt
+#
+# This installs everything, including the spaCy English model, in one step.
+# Requires Python 3.10+ (uses `X | None` / `list[...]` type hints).
+
+# PDF text + font extraction (imported as `fitz`)
+#   used by: --pdf-summary, --extract-trans, --get-norm-trans (PdfExtractor)
+PyMuPDF>=1.27.2
+
+# Excel workbook output (.xlsx)
+#   used by: every mode that writes an xlsx (speaker analysis, content-stats,
+#            word-frequency, NSW review)
+openpyxl>=3.1.5
+
+# spaCy NLP — sentence parsing / POS for content statistics
+#   used by: --content-stats (and --get-norm-trans, which runs content-stats)
+spacy>=3.8.0,<3.9.0
+
+# Number-to-words for V3 spoken-form normalization (370 -> three seventy)
+#   used by: --get-norm-trans (V1/V3 transcripts), via normalize_transcripts.py
+num2words>=0.5.14
+
+# spaCy English model (en_core_web_sm) — required by --content-stats /
+# --get-norm-trans. Installed directly from the pinned wheel so a single
+# `pip install -r requirements.txt` is enough (no separate download step).
+# Compatible with spacy 3.8.x.
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl

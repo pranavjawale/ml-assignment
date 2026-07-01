@@ -1,0 +1,70 @@
+# abbrev-expansions.tsv
+# Abbreviation / acronym expansion table for normalize_transcripts.py  (V3 output)
+#
+# Columns (tab-separated):
+#   short_form      expansion                       context     notes
+#
+# context:
+#   body  = apply to spoken text lines only  (default; never touches spk_NNNN label lines)
+#   all   = apply everywhere (not useful here since speaker lines are now spk IDs)
+#
+# Matching rules:
+#   short_form ending with '.'  → matched as  \b<base>\. followed by whitespace/punctuation
+#   short_form without '.'      → matched as whole word  \b<form>\b  (case-insensitive)
+#
+# Entries are applied longest-first to avoid partial matches.
+# Add, remove, or edit lines freely.  Lines starting with '#' are ignored.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Titles ───────────────────────────────────────────────────────────────────
+Dr.	doctor	body	Title prefix; e.g. "Dr. Singhvi" → "doctor Singhvi"
+Mr.	mister	body	Title prefix
+Mrs.	missus	body	Title prefix
+Ms.	miss	body	Title prefix
+Prof.	professor	body	Title prefix
+Hon'ble	honourable	body	Indian judicial honorific (straight-apostrophe form); e.g. "Hon'ble Court"
+Hon ble	honourable	body	Indian judicial honorific (apostrophe dropped by PDF extractor → space)
+Hon.	honourable	body	Honorific with period; e.g. "Hon. Court"
+Smt.	shrimati	body	Indian female honorific
+
+# ── Legal / procedural ───────────────────────────────────────────────────────
+vs.	versus	body	Case citation; e.g. "Union of India vs. State"
+
+# No.  -- MOVED TO CODE: expands to "number" only when followed by a digit (rule 5)
+# Art. -- MOVED TO CODE: expands to "article" only when followed by a digit (rule 4)
+Sec.	section	body	Statute section; e.g. "Sec. 124A" → "section 124A"
+Cl.	clause	body	Clause reference; e.g. "Cl. (1)" → "clause (1)"
+Sch.	schedule	body	Schedule reference; e.g. "Sch. VII" → "schedule VII"
+Pt.	part	body	Part of Constitution; e.g. "Pt. III" → "part III"
+# para -- MOVED TO CODE: expands to "paragraph" only when NOT followed by a digit (rule 1)
+Govt.	government	body
+etc.	et cetera	body
+
+# ── Institutional acronyms ───────────────────────────────────────────────────
+#CJI	Chief Justice of India	body	Speaker labels are now spk IDs so body-only is sufficient
+# SLP -- DISABLED per audio review (rule 2): spoken as letters, not expanded
+#PIL	public interest litigation	body
+WP	writ petition	body
+#ASG	additional solicitor general	body	Safe — 3 letters, low ambiguity
+# ── Below acronyms are 2-letter and may clash with personal initials — VERIFY ─
+#IA	interlocutory application	body	VERIFY — IA also appears as initials (e.g. a person named I.A.)
+#HC	high court	body	VERIFY — may conflict with initials
+#AG	attorney general	body	VERIFY — may conflict with initials (e.g. A.G. Noorani)
+# SG -- DISABLED per audio review (rule 16): spoken as letters, not expanded
+
+# ── Legal citation journals ──────────────────────────────────────────────────
+#AIR	All India Reporter	body	e.g. "AIR 1950 SC 124"
+# SCC -- DISABLED per audio review (rule 3): spoken as letters, not expanded
+
+# ── Territorial / proper-noun shortenings ────────────────────────────────────
+J&K	J and K	body	Territorial reference; e.g. "State of J&K"
+
+# ── Distance units (rule 13) ──────────────────────────────────────────────────
+# Standalone km/kms (not fused with digits); fused cases like 310km handled by _expand_distance() in code
+kms	kilometres	body	Plural distance abbreviation; e.g. "50 kms away"
+km	kilometre	body	Distance abbreviation; e.g. "50 km" -> "fifty kilometre"
+
+# ── Common spoken shortenings ─────────────────────────────────────────────────
+# Uncomment if these appear frequently in body text without a trailing period:
+# govt	government	body	Lowercase variant without period
+# SC	supreme court	body	RISKY — conflicts with many initials and caste abbreviation
