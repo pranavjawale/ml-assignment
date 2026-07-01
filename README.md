@@ -273,7 +273,7 @@ python analysis-pipeline.py --align-and-review --tag 24-file-data --file-id 001
 
 ## 8. Notes & known limitations
 
-- **Speaker IDs are rank-derived, not anchored.** `spk_NNNN` is the speaker's
+- **Speaker ID mapping may change for different set of inputs** `spk_NNNN` is the speaker's
   rank by total words spoken. For identical input it is fully reproducible, but
   adding/removing transcripts or editing `speaker-aliases.tsv` can shift a few
   mid-ranked IDs. The two `--get-norm-trans` paths (PDF vs tag-only) also count
@@ -306,7 +306,6 @@ utils/
   deduplicator.py               # SpeakerDeduplicator (clustering + spk_NNNN IDs)
   normalizer.py                 # V1/V3 transcript normalization (make_v1 / make_v3)
   nsw_align.py                  # V1↔V3 token alignment + NSW classify + review Excel writers
-                                #   (imported directly by --align-and-review[2])
   excel_builder.py              # speaker-name-analysis.xlsx (3 sheets)
   reporters.py                  # pdf-analysis-summary.txt
   content_stats.py              # spaCy content analysis (5-sheet workbook)
