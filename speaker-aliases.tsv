@@ -4,7 +4,7 @@
 # Maps raw PDF speaker strings (exactly as they appear after the colon in
 # transcripts) to their normalized canonical form. These are applied 
 # BEFORE the phonetic deduplication algorithm runs, so it handles
-# the hard cases the algorithm cannot catch on its own (OCR errors, missing
+# the hard cases the algorithm cannot catch on its own (typo errors, missing
 # spaces, dropped letters, same-person-different-name).
 #
 # Columns (tab-separated):
@@ -12,7 +12,7 @@
 #
 # - raw_name and canonical are required.
 # - category is a human-assigned label describing why the alias exists
-#   (e.g. OCR error, spacing, typo). It is documentation only — the loader
+#   (e.g. spacing, typo). It is documentation only — the loader
 #   ignores it.
 # - Lines starting with '#' and blank lines are ignored.
 # - Match is exact and case-sensitive against the raw PDF string.
